@@ -1,0 +1,1 @@
+<article class="card"><div class="card-body"><div class="meta"><span>{{ $post->published_at->translatedFormat('d M Y') }}</span><span>{{ $post->reading_time }} menit</span></div><h3><a href="{{ route('blog.show',$post) }}">{{ $post->title }}</a></h3><p>{{ $post->excerpt }}</p></div></article>

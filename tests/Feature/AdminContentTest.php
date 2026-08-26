@@ -1,0 +1,11 @@
+<?php
+use App\Models\Post;
+use App\Models\Project;
+use App\Models\User;
+use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
+uses(LazilyRefreshDatabase::class);
+it('lets an admin create and update a post',function(){ $admin=User::factory()->create(['is_admin'=>true]); $response=$this->actingAs($admin)->post(route('admin.posts.store'),['title'=>'Tulisan baru','slug'=>'tulisan-baru','excerpt'=>'Ringkasan tulisan yang jelas.','content'=>'Isi tulisan','status'=>'draft','is_featured'=>false]); $response->assertRedirect(route('admin.posts.index')); $post=Post::where('slug','tulisan-baru')->firstOrFail(); $this->actingAs($admin)->put(route('admin.posts.update',$post),['title'=>'Tulisan diperbarui','slug'=>'tulisan-baru','excerpt'=>'Ringkasan tulisan yang jelas.','content'=>'Isi tulisan baru','status'=>'published','published_at'=>now(),'is_featured'=>false])->assertRedirect(route('admin.posts.index')); $this->assertDatabaseHas('posts',['id'=>$post->id,'title'=>'Tulisan diperbarui']); });
+it('lets an admin create and update a project',function(){ $admin=User::factory()->create(['is_admin'=>true]); $payload=['name'=>'Project uji','slug'=>'project-uji','summary'=>'Ringkasan project uji.','content'=>'Studi kasus lengkap','status'=>'draft','project_status'=>'Berjalan','year'=>2026,'sort_order'=>0,'is_featured'=>false]; $this->actingAs($admin)->post(route('admin.projects.store'),$payload)->assertRedirect(route('admin.projects.index')); $project=Project::where('slug','project-uji')->firstOrFail(); $this->actingAs($admin)->put(route('admin.projects.update',$project),array_merge($payload,['name'=>'Project final']))->assertRedirect(route('admin.projects.index')); $this->assertDatabaseHas('projects',['id'=>$project->id,'name'=>'Project final']); });
+it('rejects an invalid uploaded cover',function(){ Storage::fake('public'); $admin=User::factory()->create(['is_admin'=>true]); $file=UploadedFile::fake()->create('payload.php',10,'application/x-php'); $this->actingAs($admin)->post(route('admin.posts.store'),['title'=>'Upload uji','slug'=>'upload-uji','excerpt'=>'Ringkasan','content'=>'Konten','status'=>'draft','cover_image'=>$file])->assertSessionHasErrors('cover_image'); Storage::disk('public')->assertMissing('posts/'.$file->hashName()); });
