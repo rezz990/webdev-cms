@@ -28,7 +28,7 @@ Seeder hanya membuat admin bila `ADMIN_EMAIL` dan `ADMIN_PASSWORD` diisi. Hapus 
 ## Fitur dan struktur
 
 - Public: homepage, daftar/detail project, daftar/detail blog, about, kontak, sitemap, RSS, robots, serta halaman error aman.
-- Admin: login tanpa registrasi, ringkasan, CRUD tulisan/project, status draft/scheduled/published/archived, soft delete, upload tervalidasi, dan SEO fields.
+- Admin: login tanpa registrasi, ringkasan, CRUD tulisan/project, status draft/scheduled/published/archived, soft delete, inbox kontak, media library, pengaturan profil, upload tervalidasi, dan SEO fields.
 - Domain berada di `app/Models`, public/admin controller dipisah di `app/Http/Controllers`, validasi kompleks memakai Form Request, dan schema berada di `database/migrations`.
 
 ## Quality checks
