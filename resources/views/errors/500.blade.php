@@ -1,0 +1,1 @@
+@extends('layouts.public') @section('title','Terjadi gangguan') @section('content')<section class="page-head"><div class="container narrow"><h1>Maaf, ada gangguan sementara.</h1><p>Detail teknis telah disimpan dengan aman. Silakan coba lagi beberapa saat.</p><a class="button" href="{{ route('home') }}">Kembali ke beranda</a></div></section>@endsection
