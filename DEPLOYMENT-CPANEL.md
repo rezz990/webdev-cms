@@ -10,7 +10,7 @@ Pilih PHP 8.5 dan aktifkan extension `ctype`, `curl`, `dom`, `fileinfo`, `filter
 2. Build dengan `npm ci && npm run build` di server atau lokal dengan versi lockfile yang sama, lalu upload `public/build`.
 3. Salin `.env.example` menjadi `.env`; isi `APP_ENV=production`, `APP_DEBUG=false`, `APP_URL=https://reza.web-id.id`, `DB_*`, mail domain, `QUEUE_CONNECTION=sync`, `SESSION_SECURE_COOKIE=true`, dan `FILESYSTEM_DISK=public`. Jalankan `php artisan key:generate`; jangan pernah mempublikasikan `.env` atau `APP_KEY`.
 4. Arahkan document root domain ke `<repo>/public`. Karena hosting ini mendukungnya, jangan menyalin source ke `public_html`.
-5. Aktifkan maintenance, backup database, lalu jalankan `php artisan migrate --force`. Isi `ADMIN_EMAIL` dan password sementara yang kuat, jalankan `php artisan db:seed --force`, lalu hapus dua nilai admin dari `.env`.
+5. Aktifkan maintenance, backup database, lalu jalankan `php artisan migrate --force`. Jalankan `php artisan db:seed --force` untuk konten awal, lalu buat akun melalui `php artisan admin:create`. Command meminta password secara tersembunyi sehingga kredensial tidak perlu disimpan di `.env`.
 6. Jalankan `php artisan storage:link`. Bila symlink dilarang, buat symlink dari File Manager bila tersedia atau minta provider mengaktifkannya; jangan memindahkan `.env`, `vendor`, maupun source ke direktori publik. Opsi terakhir adalah disk publik khusus yang root-nya diarahkan secara eksplisit ke folder upload non-eksekutabel dan dikaji bersama provider.
 7. Jalankan `php artisan config:cache && php artisan event:cache && php artisan route:cache && php artisan view:cache`.
 

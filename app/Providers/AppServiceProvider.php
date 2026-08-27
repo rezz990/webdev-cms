@@ -28,13 +28,11 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
+    public function boot(SettingsService $settings): void
     {
         Gate::define('access-admin', fn (User $user): bool => $user->is_admin);
         Model::preventLazyLoading(! $this->app->isProduction());
-        View::composer('layouts.public', function ($view): void {
-            $view->with('siteSettings', app(SettingsService::class)->all());
-        });
+        View::share('siteSettings', $settings->all());
         $this->configureDefaults();
     }
 

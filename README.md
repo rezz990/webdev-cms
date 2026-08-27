@@ -23,7 +23,17 @@ php artisan storage:link
 composer run dev
 ```
 
-Seeder hanya membuat admin bila `ADMIN_EMAIL` dan `ADMIN_PASSWORD` diisi. Hapus kedua nilai dari `.env` setelah seeding. Tulisan demo hanya dibuat pada environment `local`; settings dan tiga project awal di-upsert sehingga seeder aman dijalankan ulang.
+## Masuk ke dashboard admin
+
+Cara yang direkomendasikan adalah membuat admin melalui command interaktif berikut (password tidak tampil dan tidak tersimpan di shell history):
+
+```bash
+php artisan admin:create
+```
+
+Setelah mengisi nama, email, dan password minimal 12 karakter, buka `http://localhost:8000/admin/login` atau `https://reza.web-id.id/admin/login`, lalu masuk memakai email dan password tersebut. Tidak ada registrasi publik. Jika sebelumnya sudah memakai seeder, admin juga dapat dibuat dengan mengisi `ADMIN_EMAIL` dan `ADMIN_PASSWORD`, menjalankan `php artisan db:seed`, lalu **menghapus dua nilai tersebut dari `.env`**.
+
+Tulisan demo hanya dibuat pada environment `local`; settings dan tiga project awal di-upsert sehingga seeder aman dijalankan ulang.
 
 ## Fitur dan struktur
 
