@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#17231d">
+    <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="{{ asset('favicon.svg') }}">
     <title>@yield('title', $siteSettings['seo_title'] ?? 'Webdev Reza — Developer & pembuat project')</title>
     <meta name="description" content="@yield('description', $siteSettings['seo_description'] ?? 'Portfolio, tulisan, dan perjalanan project teknologi Reza.')">
     <link rel="canonical" href="{{ url()->current() }}">

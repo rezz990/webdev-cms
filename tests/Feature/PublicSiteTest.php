@@ -15,3 +15,9 @@ it('publishes a scheduled post when its publication time arrives', function () {
 });
 it('resolves published project and post slugs',function(){ $post=Post::factory()->published()->create(); $project=Project::factory()->published()->create(); $this->get('/blog/'.$post->slug)->assertOk()->assertSee($post->title); $this->get('/projects/'.$project->slug)->assertOk()->assertSee($project->name); });
 it('keeps drafts out of the sitemap',function(){ $published=Post::factory()->published()->create(); $draft=Post::factory()->create(); $this->get(route('sitemap'))->assertOk()->assertSee($published->slug)->assertDontSee($draft->slug); });
+it('uses the custom Reza favicon instead of the Laravel icon', function () {
+    $this->get(route('home'))
+        ->assertOk()
+        ->assertSee('favicon.svg')
+        ->assertDontSee('favicon.ico');
+});

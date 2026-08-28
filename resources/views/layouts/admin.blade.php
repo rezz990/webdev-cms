@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#17231d">
+    <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="{{ asset('favicon.svg') }}">
     <title>@yield('title') — Reza CMS</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -35,7 +37,14 @@
             <span class="admin-avatar" aria-hidden="true">{{ auth()->user()->initials() }}</span>
         </header>
         <main id="admin-content" class="admin-content">
-            @if (session('success'))<div class="notice" role="status">✓ {{ session('success') }}</div>@endif
+            @if (session('success'))
+                <div class="notice" role="status">
+                    ✓ {{ session('success') }}
+                    @if (session('public_url'))
+                        <a href="{{ session('public_url') }}" target="_blank" rel="noopener noreferrer">Lihat hasil di website ↗</a>
+                    @endif
+                </div>
+            @endif
             @if ($errors->any())<div class="error-box" role="alert"><strong>Ada yang perlu diperiksa.</strong><ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>@endif
             @yield('content')
         </main>

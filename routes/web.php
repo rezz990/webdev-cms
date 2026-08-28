@@ -30,6 +30,8 @@ Route::middleware('guest')->prefix('admin')->group(function () {
 
 Route::middleware(['auth', 'can:access-admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', DashboardController::class)->name('dashboard');
+    Route::get('/posts/{post}/preview', [PostController::class, 'preview'])->name('posts.preview');
+    Route::get('/projects/{project}/preview', [ProjectController::class, 'preview'])->name('projects.preview');
     Route::resource('posts', PostController::class)->except('show');
     Route::resource('projects', ProjectController::class)->except('show');
     Route::resource('messages', ContactMessageController::class)->only(['index', 'show', 'update', 'destroy']);

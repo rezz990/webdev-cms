@@ -31,6 +31,8 @@ class SavePostRequest extends FormRequest
             'seo_description' => ['nullable', 'string', 'max:160'],
             'tags' => ['array'],
             'tags.*' => ['integer', 'exists:tags,id'],
+            'new_tags' => ['nullable', 'string', 'max:500'],
+            'new_category' => ['nullable', 'string', 'max:100'],
         ];
     }
 }

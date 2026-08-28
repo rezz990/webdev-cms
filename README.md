@@ -55,3 +55,7 @@ npm run build
 ## Production
 
 Gunakan `APP_ENV=production`, `APP_DEBUG=false`, HTTPS, cookie secure, kredensial SMTP/DB hanya di `.env`, dan document root ke `public/`. Panduan cPanel lengkap ada di [DEPLOYMENT-CPANEL.md](DEPLOYMENT-CPANEL.md).
+
+## Alur menerbitkan konten
+
+Pada editor admin, tombol **Terbitkan sekarang** otomatis memilih status `published`. Jika waktu publikasi dibiarkan kosong, sistem mengisi waktu saat ini dan konten langsung muncul di `/blog` atau `/projects`. Tombol **Simpan draft** menjaga konten tetap privat. Draft dapat diperiksa melalui **Preview penuh** yang hanya bisa diakses admin. Editor menyediakan toolbar Markdown, preview langsung, penghitung kata, kategori, tag/teknologi, cover, SEO, status, dan jadwal publikasi.

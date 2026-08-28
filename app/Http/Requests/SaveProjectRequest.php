@@ -25,7 +25,11 @@ class SaveProjectRequest extends FormRequest
             'slug' => ['required', 'alpha_dash:ascii', 'max:255', Rule::unique('projects', 'slug')->ignore($this->route('project'))],
             'summary' => ['required', 'string', 'max:1200'],
             'content' => ['required', 'string'],
-            'status' => ['required', Rule::enum(ContentStatus::class)],
+            'status' => ['required', Rule::in([
+                ContentStatus::Draft->value,
+                ContentStatus::Published->value,
+                ContentStatus::Archived->value,
+            ])],
             'project_status' => ['required', 'string', 'max:50'],
             'year' => ['required', 'integer', 'between:2000,2100'],
             'role' => ['nullable', 'string', 'max:100'],
@@ -40,6 +44,8 @@ class SaveProjectRequest extends FormRequest
             'seo_description' => ['nullable', 'string', 'max:160'],
             'technologies' => ['array'],
             'technologies.*' => ['integer', 'exists:technologies,id'],
+            'new_technologies' => ['nullable', 'string', 'max:500'],
+            'new_category' => ['nullable', 'string', 'max:100'],
         ];
     }
 }
