@@ -2,6 +2,8 @@
 
 Personal developer hub, blog, dan portfolio berbasis Laravel 13, Blade, session authentication, MySQL/MariaDB, serta Tailwind CSS v4. Konten publik berasal dari database dan dikelola melalui `/admin`.
 
+Identitas visual menggunakan gaya **anime**: karakter Reza buatan sendiri, cel shading, mata ekspresif, panel manga, sakura, tipografi Jepang, torii, dan siluet kota. Tidak menggunakan atau menyalin karakter dari seri anime berhak cipta.
+
 ## Audit dan keputusan migrasi
 
 Repository yang diterima adalah skeleton Laravel satu commit; source Astro lama maupun riwayat/asset kontennya tidak tersedia untuk diaudit. Identitas yang dipertahankan dari brief: nama **Webdev Reza**, nada personal, palet `#17231d`, `#f1eee5`, `#f15b2a`, aksen `#d8f34a`, project Bujon Carwash, **ShADB**, Blokirjudi, dan WhatsApp `62895358302211`. Layout eksperimental dan link project palsu tidak digunakan. Project lama tidak dihapus karena memang tidak terdapat di repository.

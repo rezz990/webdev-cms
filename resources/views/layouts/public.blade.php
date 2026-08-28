@@ -25,17 +25,17 @@
         <nav class="container nav" aria-label="Navigasi utama">
             <a class="brand" href="{{ route('home') }}" aria-label="Webdev Reza, kembali ke beranda">
                 <span class="brand-mark" aria-hidden="true">R</span>
-                <span>{{ $siteSettings['site_name'] ?? 'Webdev Reza' }}</span>
+                <span class="brand-copy">{{ $siteSettings['site_name'] ?? 'Webdev Reza' }}<small lang="ja">ウェブ開発者</small></span>
             </a>
             <button class="menu" type="button" aria-expanded="false" aria-controls="navlinks">
                 <span class="menu-lines" aria-hidden="true"></span><span>Menu</span>
             </button>
             <div id="navlinks">
-                <a @class(['active' => request()->routeIs('home')]) href="{{ route('home') }}">Beranda</a>
-                <a @class(['active' => request()->routeIs('projects.*')]) href="{{ route('projects.index') }}">Project</a>
-                <a @class(['active' => request()->routeIs('blog.*')]) href="{{ route('blog.index') }}">Tulisan</a>
-                <a @class(['active' => request()->routeIs('about')]) href="{{ route('about') }}">Tentang</a>
-                <a class="nav-cta" href="{{ route('contact') }}">Kontak <span aria-hidden="true">↗</span></a>
+                <a @class(['active' => request()->routeIs('home')]) href="{{ route('home') }}"><span>Beranda<small lang="ja">ホーム</small></span></a>
+                <a @class(['active' => request()->routeIs('projects.*')]) href="{{ route('projects.index') }}"><span>Project<small lang="ja">作品</small></span></a>
+                <a @class(['active' => request()->routeIs('blog.*')]) href="{{ route('blog.index') }}"><span>Tulisan<small lang="ja">日誌</small></span></a>
+                <a @class(['active' => request()->routeIs('about')]) href="{{ route('about') }}"><span>Tentang<small lang="ja">自己紹介</small></span></a>
+                <a class="nav-cta" href="{{ route('contact') }}"><span>Kontak<small lang="ja">連絡</small></span> <b aria-hidden="true">↗</b></a>
             </div>
         </nav>
     </header>

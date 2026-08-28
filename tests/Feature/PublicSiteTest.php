@@ -21,3 +21,10 @@ it('uses the custom Reza favicon instead of the Laravel icon', function () {
         ->assertSee('favicon.svg')
         ->assertDontSee('favicon.ico');
 });
+it('renders the original Japanese anime identity on the homepage', function () {
+    $this->get(route('home'))
+        ->assertOk()
+        ->assertSee('Karakter original Reza bergaya anime Jepang')
+        ->assertSee('オリジナル')
+        ->assertSee('創造・技術・物語');
+});
