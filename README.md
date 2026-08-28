@@ -2,7 +2,7 @@
 
 Personal developer hub, blog, dan portfolio berbasis Laravel 13, Blade, session authentication, MySQL/MariaDB, serta Tailwind CSS v4. Konten publik berasal dari database dan dikelola melalui `/admin`.
 
-Identitas visual menggunakan gaya **anime Jepang original**: karakter Reza buatan sendiri, cel shading, mata ekspresif, panel manga, sakura, tipografi Jepang, torii, dan siluet kota. Tidak menggunakan atau menyalin karakter dari seri anime berhak cipta.
+Identitas visual menggunakan gaya **anime**: karakter Reza buatan sendiri, cel shading, mata ekspresif, panel manga, sakura, tipografi Jepang, torii, dan siluet kota. Tidak menggunakan atau menyalin karakter dari seri anime berhak cipta.
 
 ## Audit dan keputusan migrasi
 
