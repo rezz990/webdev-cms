@@ -1,0 +1,1 @@
+@extends('layouts.public') @section('title','Halaman tidak ditemukan') @section('content')<section class="page-head"><div class="container narrow"><span class="eyebrow">404</span><h1>Halaman ini tidak ditemukan.</h1><p>Mungkin alamatnya berubah atau kontennya sudah dipindahkan.</p><a class="button" href="{{ route('home') }}">Kembali ke beranda</a></div></section>@endsection

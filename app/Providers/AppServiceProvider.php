@@ -2,9 +2,14 @@
 
 namespace App\Providers;
 
+use App\Models\User;
+use App\Services\SettingsService;
 use Carbon\CarbonImmutable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 
@@ -21,8 +26,11 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
+    public function boot(SettingsService $settings): void
     {
+        Gate::define('access-admin', fn (User $user): bool => $user->is_admin);
+        Model::preventLazyLoading(! $this->app->isProduction());
+        View::share('siteSettings', $settings->all());
         $this->configureDefaults();
     }
 
