@@ -2,7 +2,7 @@
 
 Personal developer hub, blog, dan portfolio berbasis Laravel 13, Blade, session authentication, MySQL/MariaDB, serta Tailwind CSS v4. Konten publik berasal dari database dan dikelola melalui `/admin`.
 
-Identitas visual menggunakan gaya **anime**: karakter Reza buatan sendiri, cel shading, mata ekspresif, panel manga, sakura, tipografi Jepang, torii, dan siluet kota. Tidak menggunakan atau menyalin karakter dari seri anime berhak cipta.
+Identitas visual menggunakan konsep **website sebagai manga volume**: dominan hitam-putih, satu aksen oranye, panel bertinta tebal, screentone, speed lines, speech bubble, dan karakter narrator original. Struktur homepage mengikuti Cover → Chapter 01: Who Am I → Chapter 02: The Projects → Chapter 03: Dev Logs → Chapter 04: Contact. Karakter dibuat sendiri dan tidak menyalin seri manga/anime berhak cipta.
 
 ## Audit dan keputusan migrasi
 
