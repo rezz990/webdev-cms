@@ -23,8 +23,6 @@ Route::controller(PublicSiteController::class)->group(function () {
     Route::get('/feed.xml', 'feed')->name('feed');
 });
 
-Route::get('/login', fn () => redirect()->route('admin.login'))->middleware('guest')->name('login');
-
 Route::middleware('guest')->prefix('admin')->group(function () {
     Route::get('/login', [AuthController::class, 'create'])->name('admin.login');
     Route::post('/login', [AuthController::class, 'store'])->middleware('throttle:5,1')->name('admin.login.store');
