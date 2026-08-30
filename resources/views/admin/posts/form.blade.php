@@ -9,14 +9,14 @@
 
         <header class="studio-header">
             <div>
-                <a class="back-link" href="{{ route('admin.posts.index') }}">← Kembali ke tulisan</a>
+                <a class="back-link" href="{{ route('admin.posts.index') }}"> Kembali ke tulisan</a>
                 <span class="eyebrow">Writing studio</span>
                 <h1>{{ $post->exists ? 'Edit tulisan' : 'Tulis cerita baru' }}</h1>
                 <p>Susun ide, lihat preview, lalu terbitkan saat sudah siap.</p>
             </div>
             <div class="studio-header-actions">
                 @if ($post->exists)
-                    <a class="button ghost" href="{{ route('admin.posts.preview', $post) }}" target="_blank">Preview penuh ↗</a>
+                    <a class="button ghost" href="{{ route('admin.posts.preview', $post) }}" target="_blank">Preview penuh </a>
                 @endif
                 <button class="button ghost" type="submit">Simpan sesuai status</button>
                 <button class="button" type="submit" data-submit-status="published">Terbitkan sekarang</button>
@@ -35,19 +35,19 @@
 
                 <div class="studio-panel editor-panel">
                     <div class="editor-tabs" role="tablist">
-                        <button class="active" type="button" role="tab" aria-selected="true" data-editor-tab="write">✎ Tulis</button>
-                        <button type="button" role="tab" aria-selected="false" data-editor-tab="preview">◉ Preview</button>
+                        <button class="active" type="button" role="tab" aria-selected="true" data-editor-tab="write"> Tulis</button>
+                        <button type="button" role="tab" aria-selected="false" data-editor-tab="preview"> Preview</button>
                         <span class="word-count" data-word-count>0 kata · 1 menit baca</span>
                     </div>
                     <div class="markdown-toolbar" aria-label="Alat pemformatan">
                         <button type="button" data-markdown="heading" title="Heading">H2</button>
                         <button type="button" data-markdown="bold" title="Tebal"><strong>B</strong></button>
                         <button type="button" data-markdown="italic" title="Miring"><em>I</em></button>
-                        <button type="button" data-markdown="link" title="Tautan">↗ Link</button>
-                        <button type="button" data-markdown="quote" title="Kutipan">❝</button>
-                        <button type="button" data-markdown="list" title="Daftar">☷ List</button>
+                        <button type="button" data-markdown="link" title="Tautan"> Link</button>
+                        <button type="button" data-markdown="quote" title="Kutipan"></button>
+                        <button type="button" data-markdown="list" title="Daftar"> List</button>
                         <button type="button" data-markdown="code" title="Kode">&lt;/&gt;</button>
-                        <button type="button" data-markdown="image" title="Gambar">▧ Image</button>
+                        <button type="button" data-markdown="image" title="Gambar"> Image</button>
                     </div>
                     <textarea class="content-editor" id="content" name="content" rows="24" required data-markdown-editor placeholder="# Mulai ceritanya di sini…">{{ old('content', $post->content) }}</textarea>
                     <div class="markdown-preview prose" data-markdown-preview hidden></div>
@@ -96,7 +96,7 @@
 
                 <section class="studio-panel cover-panel">
                     <h2>Cover tulisan</h2>
-                    @if ($post->cover_image)<img src="{{ asset('storage/'.$post->cover_image) }}" alt="Cover saat ini" data-cover-preview>@else<div class="cover-placeholder" data-cover-placeholder><span>▧</span><strong>Belum ada cover</strong></div><img alt="Preview cover" data-cover-preview hidden>@endif
+                    @if ($post->cover_image)<img src="{{ asset('storage/'.$post->cover_image) }}" alt="Cover saat ini" data-cover-preview>@else<div class="cover-placeholder" data-cover-placeholder><span></span><strong>Belum ada cover</strong></div><img alt="Preview cover" data-cover-preview hidden>@endif
                     <label class="file-button">Pilih gambar<input type="file" name="cover_image" accept="image/jpeg,image/png,image/webp" data-cover-input></label>
                     <small>JPG, PNG, atau WebP · maksimal 4 MB.</small>
                 </section>

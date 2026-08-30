@@ -9,10 +9,15 @@ publicMenu?.addEventListener('click', () => {
 
 const adminMenu = document.querySelector('.admin-menu');
 const adminSidebar = document.querySelector('#admin-sidebar');
-adminMenu?.addEventListener('click', () => {
-    const isOpen = adminSidebar?.classList.toggle('open') ?? false;
-    adminMenu.setAttribute('aria-expanded', String(isOpen));
-});
+const sidebarBackdrop = document.querySelector('[data-sidebar-close]');
+const setAdminSidebar = (isOpen) => {
+    adminSidebar?.classList.toggle('open', isOpen);
+    adminMenu?.setAttribute('aria-expanded', String(isOpen));
+    if (sidebarBackdrop instanceof HTMLButtonElement) sidebarBackdrop.hidden = !isOpen;
+};
+adminMenu?.addEventListener('click', () => setAdminSidebar(!adminSidebar?.classList.contains('open')));
+sidebarBackdrop?.addEventListener('click', () => setAdminSidebar(false));
+adminSidebar?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setAdminSidebar(false)));
 
 if (!reducedMotion) {
     const revealObserver = new IntersectionObserver((entries) => {

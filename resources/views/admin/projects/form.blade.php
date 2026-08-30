@@ -8,9 +8,9 @@
         @if ($project->exists) @method('put') @endif
 
         <header class="studio-header">
-            <div><a class="back-link" href="{{ route('admin.projects.index') }}">← Kembali ke project</a><span class="eyebrow">Project forge</span><h1>{{ $project->exists ? 'Edit project' : 'Tempa project baru' }}</h1><p>Rakit studi kasus yang jelas dari masalah sampai hasil.</p></div>
+            <div><a class="back-link" href="{{ route('admin.projects.index') }}"> Kembali ke project</a><span class="eyebrow">Project forge</span><h1>{{ $project->exists ? 'Edit project' : 'Tempa project baru' }}</h1><p>Rakit studi kasus yang jelas dari masalah sampai hasil.</p></div>
             <div class="studio-header-actions">
-                @if ($project->exists)<a class="button ghost" href="{{ route('admin.projects.preview', $project) }}" target="_blank">Preview penuh ↗</a>@endif
+                @if ($project->exists)<a class="button ghost" href="{{ route('admin.projects.preview', $project) }}" target="_blank">Preview penuh </a>@endif
                 <button class="button ghost" type="submit">Simpan sesuai status</button>
                 <button class="button" type="submit" data-submit-status="published">Terbitkan project</button>
             </div>
@@ -27,8 +27,8 @@
                 <div class="studio-panel"><label class="field-label" for="summary">Ringkasan project</label><p class="field-help">Jelaskan nilai utama project dalam 1–3 kalimat.</p><textarea id="summary" name="summary" rows="4" required maxlength="1200" data-character-input>{{ old('summary', $project->summary) }}</textarea><small class="character-count"><span data-character-count>0</span>/1200 karakter</small></div>
 
                 <div class="studio-panel editor-panel">
-                    <div class="editor-tabs" role="tablist"><button class="active" type="button" role="tab" aria-selected="true" data-editor-tab="write">✎ Tulis studi kasus</button><button type="button" role="tab" aria-selected="false" data-editor-tab="preview">◉ Preview</button><span class="word-count" data-word-count>0 kata</span></div>
-                    <div class="markdown-toolbar"><button type="button" data-markdown="heading">H2</button><button type="button" data-markdown="bold"><strong>B</strong></button><button type="button" data-markdown="italic"><em>I</em></button><button type="button" data-markdown="link">↗ Link</button><button type="button" data-markdown="quote">❝</button><button type="button" data-markdown="list">☷ List</button><button type="button" data-markdown="code">&lt;/&gt;</button></div>
+                    <div class="editor-tabs" role="tablist"><button class="active" type="button" role="tab" aria-selected="true" data-editor-tab="write"> Tulis studi kasus</button><button type="button" role="tab" aria-selected="false" data-editor-tab="preview"> Preview</button><span class="word-count" data-word-count>0 kata</span></div>
+                    <div class="markdown-toolbar"><button type="button" data-markdown="heading">H2</button><button type="button" data-markdown="bold"><strong>B</strong></button><button type="button" data-markdown="italic"><em>I</em></button><button type="button" data-markdown="link"> Link</button><button type="button" data-markdown="quote"></button><button type="button" data-markdown="list"> List</button><button type="button" data-markdown="code">&lt;/&gt;</button></div>
                     <textarea class="content-editor" name="content" rows="26" required data-markdown-editor>{{ old('content', $project->content ?: "## Masalah yang ingin diselesaikan\n\nJelaskan konteks dan kebutuhan awal.\n\n## Solusi yang dibuat\n\nJelaskan pendekatan dan keputusan utama.\n\n## Fitur utama\n\n- Fitur pertama\n- Fitur kedua\n\n## Tantangan pengembangan\n\nCeritakan tantangan dan bagaimana kamu menyelesaikannya.\n\n## Hasil dan pelajaran\n\nApa dampak dan pelajaran dari project ini?") }}</textarea>
                     <div class="markdown-preview prose" data-markdown-preview hidden></div>
                 </div>
@@ -39,7 +39,7 @@
             <aside class="studio-sidebar">
                 <section class="studio-panel publish-panel">
                     <div class="panel-title"><h2>Publikasi</h2><span class="status-dot"></span></div>
-                    <div class="status-options">@foreach (['draft'=>['Draft','Belum tampil di website'],'published'=>['Published','Tampil setelah disimpan'],'archived'=>['Archived','Tidak ditampilkan']] as $value => [$label,$help])<label><input type="radio" name="status" value="{{ $value }}" @checked(old('status', $project->status?->value ?? 'draft') === $value)><span><strong>{{ $label }}</strong><small>{{ $help }}</small></span></label>@endforeach</div>
+                    <div class="status-options">@foreach (['draft'=>['Draft','Belum tampil di website'],'published'=>['Published','Tampil setelah disimpan'],'scheduled'=>['Scheduled','Tayang sesuai waktu publikasi'],'archived'=>['Archived','Tidak ditampilkan']] as $value => [$label,$help])<label><input type="radio" name="status" value="{{ $value }}" @checked(old('status', $project->status?->value ?? 'draft') === $value)><span><strong>{{ $label }}</strong><small>{{ $help }}</small></span></label>@endforeach</div>
                     <label>Waktu publikasi<input type="datetime-local" name="published_at" value="{{ old('published_at', $project->published_at?->format('Y-m-d\TH:i')) }}"></label>
                     <p class="publish-hint">Published tanpa waktu akan langsung tampil di halaman Project.</p>
                     <label class="check"><input type="checkbox" name="is_featured" value="1" @checked(old('is_featured', $project->is_featured))> Tampilkan di beranda</label>
@@ -50,7 +50,7 @@
 
                 <section class="studio-panel"><fieldset class="option-fieldset"><legend>Teknologi</legend><div class="option-chips">@foreach ($technologies as $technology)<label><input type="checkbox" name="technologies[]" value="{{ $technology->id }}" @checked(in_array($technology->id, old('technologies', $project->exists ? $project->technologies->pluck('id')->all() : [])))><span>{{ $technology->name }}</span></label>@endforeach</div><label>Teknologi baru, pisahkan dengan koma<input name="new_technologies" value="{{ old('new_technologies') }}" placeholder="Redis, Meilisearch"></label></fieldset></section>
 
-                <section class="studio-panel cover-panel"><h2>Cover project</h2>@if ($project->cover_image)<img src="{{ asset('storage/'.$project->cover_image) }}" alt="Cover saat ini" data-cover-preview>@else<div class="cover-placeholder" data-cover-placeholder><span>▧</span><strong>Belum ada cover</strong></div><img alt="Preview cover" data-cover-preview hidden>@endif<label class="file-button">Pilih gambar<input type="file" name="cover_image" accept="image/jpeg,image/png,image/webp" data-cover-input></label><small>Rekomendasi rasio 16:10, maksimal 4 MB.</small></section>
+                <section class="studio-panel cover-panel"><h2>Cover project</h2>@if ($project->cover_image)<img src="{{ asset('storage/'.$project->cover_image) }}" alt="Cover saat ini" data-cover-preview>@else<div class="cover-placeholder" data-cover-placeholder><span></span><strong>Belum ada cover</strong></div><img alt="Preview cover" data-cover-preview hidden>@endif<label class="file-button">Pilih gambar<input type="file" name="cover_image" accept="image/jpeg,image/png,image/webp" data-cover-input></label><small>Rekomendasi rasio 16:10, maksimal 4 MB.</small></section>
             </aside>
         </div>
     </form>

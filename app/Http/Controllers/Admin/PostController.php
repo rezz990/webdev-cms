@@ -24,8 +24,8 @@ class PostController extends Controller
     {
         $posts = Post::query()
             ->with('category')
-            ->when($request->filled('q'), fn ($query) => $query->where('title', 'like', '%'.$request->string('q').'%'))
-            ->when($request->filled('status'), fn ($query) => $query->where('status', $request->string('status')))
+            ->when($request->filled('q'), fn ($query) => $query->where('title', 'like', '%'.$request->string('q')->toString().'%'))
+            ->when($request->filled('status'), fn ($query) => $query->where('status', $request->string('status')->toString()))
             ->latest('updated_at')
             ->paginate(15)
             ->withQueryString();
@@ -143,7 +143,7 @@ class PostController extends Controller
     private function tagIds(SavePostRequest $request): array
     {
         $tagIds = collect($request->input('tags', []));
-        $names = Str::of($request->string('new_tags')->toString())->explode(',')->map->trim()->filter();
+        $names = Str::of($request->string('new_tags')->toString())->explode(',')->map(fn ($name) => trim((string) $name))->filter();
 
         foreach ($names as $name) {
             $tagIds->push(Tag::query()->firstOrCreate(

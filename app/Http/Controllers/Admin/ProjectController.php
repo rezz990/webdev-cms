@@ -24,8 +24,8 @@ class ProjectController extends Controller
     {
         $projects = Project::query()
             ->with('category')
-            ->when($request->filled('q'), fn ($query) => $query->where('name', 'like', '%'.$request->string('q').'%'))
-            ->when($request->filled('status'), fn ($query) => $query->where('status', $request->string('status')))
+            ->when($request->filled('q'), fn ($query) => $query->where('name', 'like', '%'.$request->string('q')->toString().'%'))
+            ->when($request->filled('status'), fn ($query) => $query->where('status', $request->string('status')->toString()))
             ->latest('updated_at')
             ->paginate(15)
             ->withQueryString();
@@ -132,12 +132,12 @@ class ProjectController extends Controller
     private function technologyIds(SaveProjectRequest $request): array
     {
         $technologyIds = collect($request->input('technologies', []));
-        $names = Str::of($request->string('new_technologies')->toString())->explode(',')->map->trim()->filter();
+        $names = Str::of($request->string('new_technologies')->toString())->explode(',')->map(fn ($name) => trim((string) $name))->filter();
 
         foreach ($names as $name) {
             $technologyIds->push(Technology::query()->firstOrCreate(
                 ['slug' => Str::slug($name)],
-                ['name' => $name, 'sort_order' => Technology::query()->max('sort_order') + 1],
+                ['name' => $name, 'sort_order' => (Technology::query()->max('sort_order') ?? 0) + 1],
             )->id);
         }
 
@@ -146,7 +146,8 @@ class ProjectController extends Controller
 
     private function savedResponse(Project $project, string $message): RedirectResponse
     {
-        $isPublic = $project->status === ContentStatus::Published && $project->published_at?->isPast();
+        $isPublic = in_array($project->status, [ContentStatus::Published, ContentStatus::Scheduled], true)
+            && $project->published_at?->isPast();
 
         return redirect()
             ->route('admin.projects.edit', $project)

@@ -3,11 +3,9 @@
 use App\Models\ContactMessage;
 use App\Models\MediaAsset;
 use App\Models\User;
-use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
-uses(LazilyRefreshDatabase::class);
 
 it('lets an admin update public settings without accepting sensitive keys', function () {
     $admin = User::factory()->create(['is_admin' => true]);
@@ -61,4 +59,27 @@ it('marks a contact message as read when an admin opens it', function () {
     $this->actingAs($admin)->get(route('admin.messages.show', $message))->assertOk()->assertSeeText($message->message);
 
     expect($message->fresh()->read_at)->not->toBeNull();
+});
+
+
+it('filters unread contact messages in the admin inbox', function () {
+    $admin = User::factory()->create(['is_admin' => true]);
+    ContactMessage::query()->create([
+        'name' => 'Pesan Baru',
+        'email' => 'baru@example.com',
+        'message' => 'Pesan yang belum dibaca.',
+        'read_at' => null,
+    ]);
+    ContactMessage::query()->create([
+        'name' => 'Pesan Lama',
+        'email' => 'lama@example.com',
+        'message' => 'Pesan yang sudah dibaca.',
+        'read_at' => now(),
+    ]);
+
+    $this->actingAs($admin)
+        ->get(route('admin.messages.index', ['status' => 'unread']))
+        ->assertOk()
+        ->assertSeeText('Pesan Baru')
+        ->assertDontSeeText('Pesan Lama');
 });

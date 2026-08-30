@@ -1,8 +1,6 @@
 <?php
 use App\Models\Post;
 use App\Models\Project;
-use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
-uses(LazilyRefreshDatabase::class);
 it('renders the homepage',fn()=>$this->get(route('home'))->assertOk()->assertSee('Halo, saya Reza'));
 it('only exposes published posts',function(){ $published=Post::factory()->published()->create(['title'=>'Terlihat publik']); $draft=Post::factory()->create(['title'=>'Rahasia draft']); $this->get(route('blog.index'))->assertOk()->assertSee($published->title)->assertDontSee($draft->title); $this->get(route('blog.show',$draft))->assertNotFound(); });
 it('does not expose scheduled posts before publication',function(){ $post=Post::factory()->scheduled()->create(); $this->get(route('blog.show',$post))->assertNotFound(); $this->get(route('blog.index'))->assertDontSee($post->title); });
@@ -21,12 +19,12 @@ it('uses the custom Reza favicon instead of the Laravel icon', function () {
         ->assertSee('favicon.svg')
         ->assertDontSee('favicon.ico');
 });
-it('renders the black and white manga volume identity on the homepage', function () {
+it('renders the anime night city developer identity on the homepage', function () {
     $this->get(route('home'))
         ->assertOk()
-        ->assertSee('Karakter narrator original Reza bergaya manga Jepang')
-        ->assertSee('オリジナル')
-        ->assertSee('CHAPTER')
-        ->assertSee('The Projects')
-        ->assertSee('Dev Logs');
+        ->assertSee('Membangun produk digital yang')
+        ->assertSee('benar-benar dipakai.')
+        ->assertSee('Project pilihan')
+        ->assertSee('Dev journal')
+        ->assertDontSee('CHAPTER');
 });
