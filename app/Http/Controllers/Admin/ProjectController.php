@@ -146,7 +146,8 @@ class ProjectController extends Controller
 
     private function savedResponse(Project $project, string $message): RedirectResponse
     {
-        $isPublic = in_array($project->status, [ContentStatus::Published, ContentStatus::Scheduled], true)\n            && $project->published_at?->isPast();
+        $isPublic = in_array($project->status, [ContentStatus::Published, ContentStatus::Scheduled], true)
+            && $project->published_at?->isPast();
 
         return redirect()
             ->route('admin.projects.edit', $project)
