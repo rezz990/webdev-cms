@@ -88,8 +88,19 @@
 .contact-modern p { max-width: 650px; font-size: 1.08rem; }
 
 .public-shell footer { background: #05070e; border-top: 1px solid var(--public-line); color: white; }
+.public-shell footer::before { display: none; content: none; }
 .public-shell .footer p, .public-shell .footer > small { color: #858ba1; }
 .public-shell .notice, .public-shell .empty { background: var(--public-surface-soft); border-color: var(--public-line); box-shadow: none; color: var(--public-text); }
+.public-shell .page-head { background: radial-gradient(circle at 86% 15%, rgb(156 140 255 / .13), transparent 30%), linear-gradient(180deg, #0d1020, #090b16); border-color: var(--public-line); }
+.public-shell .page-head::before { color: rgb(156 140 255 / .06); content: 'WEBDEV REZA'; font-family: Manrope, sans-serif; letter-spacing: .04em; writing-mode: vertical-rl; }
+.public-shell .page-head::after { background: rgb(156 140 255 / .08); border-color: var(--public-line); }
+.public-shell .page-head p, .public-shell .prose { color: var(--public-muted); }
+.public-shell .section.alt { background: var(--public-surface); }
+.public-shell .article a, .public-shell .prose a { color: var(--public-violet-bright); }
+.public-shell .prose pre { background: #050711; border-color: var(--public-violet); }
+.public-shell .filters input, .public-shell .filters select, .public-shell .form input, .public-shell .form select, .public-shell .form textarea { background: var(--public-surface); color: var(--public-text); border: 1px solid var(--public-line); }
+.public-shell .filters input:focus, .public-shell .filters select:focus, .public-shell .form input:focus, .public-shell .form select:focus, .public-shell .form textarea:focus { box-shadow: 0 0 0 3px rgb(156 140 255 / .15); border-color: var(--public-violet); transform: none; }
+.public-shell .text-link, .public-shell .ink-link { color: var(--public-violet-bright); }
 
 @media (max-width: 840px) {
     .night-hero { min-height: calc(100svh - 68px); background-position: 62% center; }
