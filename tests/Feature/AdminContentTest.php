@@ -42,6 +42,7 @@ it('updates a post and exposes an admin-only preview for drafts', function () {
     ])->assertRedirect(route('admin.posts.edit', $post));
 
     $this->actingAs($admin)->get(route('admin.posts.preview', $post))->assertOk()->assertSee('Mode preview admin');
+    $this->app['auth']->logout();
     $this->get(route('admin.posts.preview', $post))->assertRedirect(route('admin.login'));
     $this->assertDatabaseHas('posts', ['id' => $post->id, 'title' => 'Tulisan diperbarui']);
 });
