@@ -1,9 +1,7 @@
 <?php
 
-use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 
-uses(LazilyRefreshDatabase::class);
 
 it('creates an administrator through the guided command', function () {
     $this->artisan('admin:create', ['--name' => 'Reza', '--email' => 'admin@example.com'])

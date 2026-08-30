@@ -1,8 +1,6 @@
 <?php
 use App\Models\Post;
 use App\Models\Project;
-use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
-uses(LazilyRefreshDatabase::class);
 it('renders the homepage',fn()=>$this->get(route('home'))->assertOk()->assertSee('Halo, saya Reza'));
 it('only exposes published posts',function(){ $published=Post::factory()->published()->create(['title'=>'Terlihat publik']); $draft=Post::factory()->create(['title'=>'Rahasia draft']); $this->get(route('blog.index'))->assertOk()->assertSee($published->title)->assertDontSee($draft->title); $this->get(route('blog.show',$draft))->assertNotFound(); });
 it('does not expose scheduled posts before publication',function(){ $post=Post::factory()->scheduled()->create(); $this->get(route('blog.show',$post))->assertNotFound(); $this->get(route('blog.index'))->assertDontSee($post->title); });
