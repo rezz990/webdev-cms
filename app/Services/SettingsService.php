@@ -3,7 +3,8 @@
 namespace App\Services;
 
 use App\Models\Setting;
-use Illuminate\Database\QueryException;\nuse Illuminate\Support\Facades\Cache;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Schema;
 
 class SettingsService
