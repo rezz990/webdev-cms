@@ -35,7 +35,7 @@
                 <a @class(['active' => request()->routeIs('about')]) href="{{ route('about') }}"><span>Tentang</span></a>
                 <a @class(['active' => request()->routeIs('projects.*')]) href="{{ route('projects.index') }}"><span>Project</span></a>
                 <a @class(['active' => request()->routeIs('blog.*')]) href="{{ route('blog.index') }}"><span>Tulisan</span></a>
-                <a class="nav-cta" href="{{ route('contact') }}"><span>Kontak</span> <b aria-hidden="true">→</b></a>
+                <a class="nav-cta" href="{{ route('contact') }}"><span>Kontak</span> <b aria-hidden="true"></b></a>
             </div>
         </nav>
     </header>
@@ -54,8 +54,8 @@
                 <div><strong>{{ $siteSettings['site_name'] ?? 'Webdev Reza' }}</strong><p>Membuat teknologi dari kebutuhan nyata.</p></div>
             </div>
             <div class="footer-links">
-                <a href="{{ $siteSettings['github'] ?? 'https://github.com/rezafikkri' }}" rel="noopener noreferrer" target="_blank">GitHub ↗</a>
-                <a href="https://wa.me/{{ $siteSettings['whatsapp'] ?? '62895358302211' }}" rel="noopener noreferrer" target="_blank">WhatsApp ↗</a>
+                <a href="{{ $siteSettings['github'] ?? 'https://github.com/rezafikkri' }}" rel="noopener noreferrer" target="_blank">GitHub </a>
+                <a href="https://wa.me/{{ $siteSettings['whatsapp'] ?? '62895358302211' }}" rel="noopener noreferrer" target="_blank">WhatsApp </a>
                 <a href="{{ route('admin.login') }}">Admin</a>
             </div>
             <small>© {{ date('Y') }} Reza · Dibangun dengan Laravel.</small>

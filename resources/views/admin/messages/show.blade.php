@@ -3,7 +3,7 @@
 @section('title', 'Pesan dari '.$message->name)
 
 @section('content')
-    <a href="{{ route('admin.messages.index') }}">← Kembali ke pesan</a>
+    <a href="{{ route('admin.messages.index') }}"> Kembali ke pesan</a>
     <article class="message-detail">
         <span class="eyebrow">{{ $message->created_at->translatedFormat('d F Y H:i') }}</span>
         <h1>{{ $message->subject ?: 'Pesan dari '.$message->name }}</h1>
