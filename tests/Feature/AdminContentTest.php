@@ -3,11 +3,9 @@
 use App\Models\Post;
 use App\Models\Project;
 use App\Models\User;
-use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
-uses(LazilyRefreshDatabase::class);
 
 it('publishes a newly created post immediately when no date is supplied', function () {
     $admin = User::factory()->create(['is_admin' => true]);

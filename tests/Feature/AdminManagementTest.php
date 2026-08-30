@@ -3,11 +3,9 @@
 use App\Models\ContactMessage;
 use App\Models\MediaAsset;
 use App\Models\User;
-use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
-uses(LazilyRefreshDatabase::class);
 
 it('lets an admin update public settings without accepting sensitive keys', function () {
     $admin = User::factory()->create(['is_admin' => true]);
