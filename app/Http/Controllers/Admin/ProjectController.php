@@ -132,7 +132,7 @@ class ProjectController extends Controller
     private function technologyIds(SaveProjectRequest $request): array
     {
         $technologyIds = collect($request->input('technologies', []));
-        $names = Str::of($request->string('new_technologies')->toString())->explode(',')->map->trim()->filter();
+        $names = Str::of($request->string('new_technologies')->toString())->explode(',')->map(fn ($name) => trim((string) $name))->filter();
 
         foreach ($names as $name) {
             $technologyIds->push(Technology::query()->firstOrCreate(

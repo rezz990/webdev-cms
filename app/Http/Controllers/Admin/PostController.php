@@ -143,7 +143,7 @@ class PostController extends Controller
     private function tagIds(SavePostRequest $request): array
     {
         $tagIds = collect($request->input('tags', []));
-        $names = Str::of($request->string('new_tags')->toString())->explode(',')->map->trim()->filter();
+        $names = Str::of($request->string('new_tags')->toString())->explode(',')->map(fn ($name) => trim((string) $name))->filter();
 
         foreach ($names as $name) {
             $tagIds->push(Tag::query()->firstOrCreate(

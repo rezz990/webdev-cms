@@ -64,8 +64,18 @@ it('marks a contact message as read when an admin opens it', function () {
 
 it('filters unread contact messages in the admin inbox', function () {
     $admin = User::factory()->create(['is_admin' => true]);
-    ContactMessage::factory()->create(['name' => 'Pesan Baru', 'read_at' => null]);
-    ContactMessage::factory()->create(['name' => 'Pesan Lama', 'read_at' => now()]);
+    ContactMessage::query()->create([
+        'name' => 'Pesan Baru',
+        'email' => 'baru@example.com',
+        'message' => 'Pesan yang belum dibaca.',
+        'read_at' => null,
+    ]);
+    ContactMessage::query()->create([
+        'name' => 'Pesan Lama',
+        'email' => 'lama@example.com',
+        'message' => 'Pesan yang sudah dibaca.',
+        'read_at' => now(),
+    ]);
 
     $this->actingAs($admin)
         ->get(route('admin.messages.index', ['status' => 'unread']))
